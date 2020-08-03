@@ -11,3 +11,4 @@ This website is created using [Markdown](https://en.wikipedia.org/wiki/Markdown)
 
 ## Best Practices
 
+[Page 1](/BestPractices/page1.md)
