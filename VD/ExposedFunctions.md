@@ -29,15 +29,15 @@ void AddGoalLongReachDistance(float Speed, float DistToReach = 0., bool isInfini
 
 void AddGoalLongMaintain(float Speed, bool isImmediate = true);
 
-float RoadDistanceTo(const UVirtualDriverComponent* Other)
+float RoadDistanceTo(const UVirtualDriverComponent* Other);
 
-float THW(const UVirtualDriverComponent* Other) 
+float THW(const UVirtualDriverComponent* Other);
 
-float TimeTo(const UOpenDriveComponent* Other) 
+float TimeTo(const UOpenDriveComponent* Other);
 
-float TTC(const UVirtualDriverComponent* Other) 
+float TTC(const UVirtualDriverComponent* Other);
 
-float ETTC(const UVirtualDriverComponent* Other) 
+float ETTC(const UVirtualDriverComponent* Other);
 ```
 
 
@@ -69,17 +69,17 @@ void SetTrackPosition(int track_id, int lane_id, float s, float offset, float h)
 
 bool MoveAlongS(float S, int Strategy=0);
 
-int GetRoadId() const { return _Odr->OdrPosition().GetTrackId(); }
+int GetRoadId();
 
-int GetJunctionId() const { return _Odr->OdrPosition().GetRoad()->GetJunction(); }
+int GetJunctionId();
 
-float GetNextJunctionDistance() const { return _Odr->OdrPosition().GetNextJunction().distance; }
+float GetNextJunctionDistance();
 
-float GetNextJunctionId() const { return _Odr->OdrPosition().GetNextJunction().junction->GetId(); }
+float GetNextJunctionId();
 
-bool IsJunctionDistanceLessThan(float Dist, int JunctionId = -1) const;
+bool IsJunctionDistanceLessThan(float Dist, int JunctionId = -1);
 
-float SDistanceTo(const UOpenDriveComponent* Other) const { return _Odr->SDistanceTo(Other->GetOdr()); }
+float SDistanceTo(const UOpenDriveComponent* Other);
 
-float GetCurrentCurvature() const { return _Odr->OdrPosition().GetCurvature(); }
+float GetCurrentCurvature();
 ```
