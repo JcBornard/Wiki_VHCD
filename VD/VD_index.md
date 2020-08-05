@@ -1,1 +1,1 @@
-[Exposed Functions & properties](/VD/ExposedFunctions.md)
+[Exposed Functions & properties](../VD/ExposedFunctions.md)
