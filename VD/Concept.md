@@ -4,9 +4,9 @@ The Virtual Driver (VD) is a software driving a car inside an opendrive descript
 VD controls the car through steering wheel angle and pedal depression.
 Controlled car is connected to the VD through a virtual class that must be implemented in the welcoming simulator.
 
-# Internal concept
+# Internal components
 at a given simulation time, VD as:
-- Current lane: the opendrive's lane that VD can project into
+- Current lane: the opendrive's drivable lane that VD can project into
 - Current speed: the current speed of the controlled car
 
 - Current pedals depression: the current computed pedals depression allowing VD to reach the desired speed
@@ -14,11 +14,15 @@ at a given simulation time, VD as:
 
 - Current speed goal: the speed that VD need to reach and/or maintain
     - This is a **longitudinal goal**
-- Current trajectory: the trajectory that VD currently maintain. This can be center of lane, or a custom Bezier curve
+- Current trajectory: the trajectory that VD currently maintain. This can be the center of a lane, or a custom Bezier curve
     - This is a **lateral goal**
 
 - A list of chained longitudinal goals
 - A list of chained lateral goals
 
 
-# 
+# Use
+Once the VD is connected to a simulated car and an opendrive file is provided to it, then it become possible to place the simulated car holding the VD in the simulation
+
+If the car is placed on a lane, then this lane become natively the current lane to follow. This define automatically the current longitudinal goal
+

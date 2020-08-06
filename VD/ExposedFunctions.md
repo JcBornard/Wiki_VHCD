@@ -1,36 +1,96 @@
 # List of exposed Functions of Virtual Driver Component:
-# Category = "Virtual Driver Component"
+# Category "Virtual Driver Component"
+
+## Getters
 ```cpp
 vdCarDrivable* GetVdCar();
 ```
+Returns the pointer to the car of the VD. 
+It refers to: 
+- The controller (the VD)
+- The current steer angle (rad)
+- The max steer angle (rad)
+- The wheelbase value (m)
+- The current simulation time
 
 ```cpp
 float PedalDepression();
 ```
+Returns <span style="color: red;">X</span> the current pedals depressions. X ∈ [-1..1]. [0..1] represents acceleration from 0% to 100%, [-1..0[ represents deceleration from 0% to 100%
 
 ```cpp
 float SteeringWheelAngle();
 ```
+Returns <span style="color: red;">X</span> the current steering wheel angle. X ∈ [-1..1]. if X ∈ ]0..1] then VD steers to the right, if X ∈ [-1..0[ then VD steers to the left, from 0% to 100% off the max steering angle
 
+
+## Functions
 ```cpp
 void ReachSpeedInSeconds(float Speed, float TimeToReach = 0.);
 ```
+Inputs:
+- ***Speed*** (m.s-1) to maintain
+- ***TimeToReach*** Time (s) to reach the desired speed
 
+Adds the following goals to the Virtual Driver:
+- Keep the current lane
+- Reach ***Speed*** in ***TimeToReach*** seconds
+	
 ```cpp
 void FollowCar(const UVirtualDriverComponent* LeadCar, float Headway = 1.6);
 ```
+Inputs:
+- ***LeadCar*** Car to follow
+- ***Headway*** Time headway (s) to maintain, default value = 1.6s
+
+Adds the following goals to the Virtual Driver
+- Keep the current lane
+- Follow ***LeadCar*** at the given Time ***Headway***
 
 ```cpp
 void ReachSpeedInMeters(float Speed, float TotalDist, bool IsInfinite = true);
 ```
+Inputs:
+- ***Speed*** (m.s-1) to maintain
+- ***TotalDist*** Distance (m) to reach ***Speed***
+
+Adds the following goals to the Virtual Driver
+- Keep the current lane
+- Reach ***Speed*** in ***TotalDist*** distance
 
 ```cpp
 void ChangeLane(int Lane, float S, float Speed, float BezierIn = 25., float BezierOut = 25.);
 ```
+Inputs:
+- ***Lane*** offset to apply (-1: one lane on the left, +1 one lane on the right, -2 two lanes on the left)
+- ***S*** Time (s) to reach the new lane
+- ***Speed*** (m.s-1) to reach at the end of the lane change
+- ***BezierIn*** start control point distance ([0..100]) of the Bezier curve. Vector is aligned with previous trajectory 
+- ***BezierOut*** end control point distance ([0..100]) of the Bezier curve. Vector is aligned with future lane
+
+Adds the following goals to the Virtual Driver
+- Change to ***Lane*** direction, then keep the new lane
+- Reach ***Speed***, then maintain it
 
 ```cpp
 void CrossJunction(int Strategy, float SpeedBefore, float SpeedAfter, bool isImmediate = true);
 ```
+Inputs:
+- ***Strategy*** is where the VD will turn in the junction. List of strategies:
+    - LEFT_SECOND = -2,
+	- LEFT_FIRST = -1,
+	- STRAIGHT = 0,
+	- RIGHT_FIRST = 1,
+	- RIGHT_SECOND = 2
+- ***SpeedBefore*** to reach before the beginning of the junction
+- ***SpeedAfter*** to reach at the end of the junction
+- ***isImmediate*** boolean 
+
+Adds the following goals to the Virtual Driver
+- Reach ***SpeedBefore*** before the junction
+- Follow the road in the junction that correspond to the ***Strategy***
+- Reach ***SpeedAfter*** during the junction
+- Keep the lane connected to the ***Strategy***'s road after the junction
 
 ```cpp
 void AddGoalLatTrajOdrJunction(int Strategy, bool isImmediate = true);
@@ -78,7 +138,8 @@ float ETTC(const UVirtualDriverComponent* Other);
 
 
 # List of exposed Properties of OpenDrive Component:
-## Category = "OpenDRIVE"
+
+## Category "OpenDRIVE"
 ```cpp
 int RoadId;
 ```
