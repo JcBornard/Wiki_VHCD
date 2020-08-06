@@ -16,7 +16,7 @@ It refers to:
 ```cpp
 float PedalDepression();
 ```
-Returns <span style="color: red;">X</span> the current pedals depressions. X ∈ [-1..1]. [0..1] represents acceleration from 0% to 100%, [-1..0[ represents deceleration from 0% to 100%
+Returns X the current pedals depressions. X ∈ [-1..1]. [0..1] represents acceleration from 0% to 100%, [-1..0[ represents deceleration from 0% to 100%
 
 ```cpp
 float SteeringWheelAngle();
@@ -83,7 +83,7 @@ Inputs:
 	- RIGHT_FIRST = 1,
 	- RIGHT_SECOND = 2
 - ***SpeedBefore*** to reach before the beginning of the junction
-- ***SpeedAfter*** to reach at the end of the junction
+- ***SpeedAfter*** to reach after the end of the junction
 - ***isImmediate*** boolean 
 
 Adds the following goals to the Virtual Driver
