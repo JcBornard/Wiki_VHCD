@@ -1,7 +1,8 @@
-# List of exposed Functions of Virtual Driver Component:
-# Category "Virtual Driver Component"
+#List of exposed Functions of Virtual Driver Component:
 
-## Getters
+## Category "Virtual Driver Component"
+
+### Getters
 ```cpp
 vdCarDrivable* GetVdCar();
 ```
@@ -24,10 +25,10 @@ float SteeringWheelAngle();
 Returns <span style="color: red;">X</span> the current steering wheel angle. X ∈ [-1..1]. if X ∈ ]0..1] then VD steers to the right, if X ∈ [-1..0[ then VD steers to the left, from 0% to 100% off the max steering angle
 
 
-## Functions
+### Functions
 
-### High level - composition of low level (multiple goals added)
-These functions are composition of low level function, they are more likely to be used when creating a scenario with a VD.
+#### High level - composition of low level (multiple goals added)
+These functions are composition of low level functions, they are more likely to be used when creating a scenario with a VD.
 
 ```cpp
 void ReachSpeedInSeconds(float Speed, float TimeToReach = 0.);
@@ -45,7 +46,7 @@ void FollowCar(const UVirtualDriverComponent* LeadCar, float Headway = 1.6);
 ```
 Inputs:
 - ***LeadCar*** Car to follow
-- ***Headway*** Time headway (s) to maintain, default value = 1.6s
+- Time ***Headway*** (s) to maintain, default value = 1.6s
 
 Adds the following goals to the Virtual Driver
 - Keep the current lane
@@ -94,10 +95,10 @@ Inputs:
 Adds the following goals to the Virtual Driver
 - Reach ***SpeedBefore*** before the junction
 - Follow the road in the junction that correspond to the ***Strategy***
-- Reach ***SpeedAfter*** during the junction
+- Reach ***SpeedAfter*** after the junction
 - Keep the lane connected to the ***Strategy***'s road after the junction
 
-### Low level - Only one goal (lateral xor longitudinal)
+#### Low level - Only one goal (lateral xor longitudinal)
 These function are basic element allowing creation of more understandable function (more high level). 
 Nevertheless, they can also be called.
 
@@ -108,7 +109,7 @@ Inputs:
 - ***Strategy*** 
 - ***isImmediate*** 
 
-Adds the following goals to the Virtual Driver
+Adds the following goal to the Virtual Driver
 - Follow ***Strategy*** for the next junction
 
 ```cpp
@@ -117,7 +118,7 @@ void AddGoalLatTrajOdr(bool isImmediate = true);
 Inputs:
 - ***isImmediate*** 
 
-Adds the following goals to the Virtual Driver
+Adds the following goal to the Virtual Driver
 - Follow the current lane endlessly (till next junction)
 
 ```cpp
@@ -130,7 +131,7 @@ Inputs:
 - ***CpEnd*** control point of the ending point of the Bezier curve
 - ***isImmediate*** 
 
-Adds the following goals to the Virtual Driver
+Adds the following goal to the Virtual Driver
 - Add a Bezier curve to follow regarding two opendrive points
 
 ```cpp
@@ -142,7 +143,7 @@ Inputs:
 - ***isInfinite*** specify if the goal end when speed is reached, or will never end.
 - ***isImmediate*** 
 
-Adds the following goals to the Virtual Driver
+Adds the following goal to the Virtual Driver
 - Reach ***Speed***, maintain afterwards it if ***isInfinite***
 
 ```cpp
@@ -153,7 +154,7 @@ Inputs:
 - ***DistToReach*** to reach ***Speed***
 - ***isImmediate***
 
-Adds the following goals to the Virtual Driver
+Adds the following goal to the Virtual Driver
 - Reach ***Speed*** in ***DistToReach*** meters
 
 
@@ -163,10 +164,10 @@ void AddGoalLongMaintain(float Speed, bool isImmediate = true);
 Inputs:
 - ***Speed*** to maintain
 - ***isImmediate*** 
-Adds the following goals to the Virtual Driver
+Adds the following goal to the Virtual Driver
 - Maintain ***Speed***
 
-### Data computation
+#### Data computation
 
 ```cpp
 float RoadDistanceTo(const UVirtualDriverComponent* Other);
@@ -216,7 +217,6 @@ Inputs:
 
 Returns:
 - Enhanced Time to Collision (ISO 22839) to the ***Other*** mobil
-
 
 
 # List of exposed Properties of OpenDrive Component:
@@ -292,3 +292,14 @@ float GetCurrentCurvature();
 ```cpp
 float GetNextCurvature(float dist) const;
 ```
+
+
+
+# Docs template
+```cpp
+function header
+```
+Inputs
+-***Name*** explanation
+Outputs explanations (either outputs, either what the function does)
+-
