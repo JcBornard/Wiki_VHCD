@@ -1,4 +1,4 @@
-#List of exposed Functions of Virtual Driver Component:
+# List of exposed Functions of Virtual Driver Component:
 
 ## Category "Virtual Driver Component"
 
