@@ -25,6 +25,10 @@ Returns <span style="color: red;">X</span> the current steering wheel angle. X â
 
 
 ## Functions
+
+### High level - composition of low level (multiple goals added)
+These functions are composition of low level function, they are more likely to be used when creating a scenario with a VD.
+
 ```cpp
 void ReachSpeedInSeconds(float Speed, float TimeToReach = 0.);
 ```
@@ -53,10 +57,11 @@ void ReachSpeedInMeters(float Speed, float TotalDist, bool IsInfinite = true);
 Inputs:
 - ***Speed*** (m.s-1) to maintain
 - ***TotalDist*** Distance (m) to reach ***Speed***
+- ***IsInfinite*** specify if the goal end when speed is reached, or will never end.
 
 Adds the following goals to the Virtual Driver
 - Keep the current lane
-- Reach ***Speed*** in ***TotalDist*** distance
+- Reach ***Speed*** in ***TotalDist*** distance, maintain afterwards it if ***isInfinite***
 
 ```cpp
 void ChangeLane(int Lane, float S, float Speed, float BezierIn = 25., float BezierOut = 25.);
@@ -84,7 +89,7 @@ Inputs:
 	- RIGHT_SECOND = 2
 - ***SpeedBefore*** to reach before the beginning of the junction
 - ***SpeedAfter*** to reach after the end of the junction
-- ***isImmediate*** boolean 
+- ***isImmediate***  
 
 Adds the following goals to the Virtual Driver
 - Reach ***SpeedBefore*** before the junction
@@ -92,49 +97,126 @@ Adds the following goals to the Virtual Driver
 - Reach ***SpeedAfter*** during the junction
 - Keep the lane connected to the ***Strategy***'s road after the junction
 
+### Low level - Only one goal (lateral xor longitudinal)
+These function are basic element allowing creation of more understandable function (more high level). 
+Nevertheless, they can also be called.
+
 ```cpp
 void AddGoalLatTrajOdrJunction(int Strategy, bool isImmediate = true);
 ```
+Inputs:
+- ***Strategy*** 
+- ***isImmediate*** 
+
+Adds the following goals to the Virtual Driver
+- Follow ***Strategy*** for the next junction
 
 ```cpp
 void AddGoalLatTrajOdr(bool isImmediate = true);
 ```
+Inputs:
+- ***isImmediate*** 
+
+Adds the following goals to the Virtual Driver
+- Follow the current lane endlessly (till next junction)
 
 ```cpp
 void AddGoalLatTrajBezier(const UOpenDriveComponent *Start, const UOpenDriveComponent *End, float CpStart = 50., float CpEnd = 50., bool isImmediate = true);
 ```
+Inputs:
+- ***Start*** Opendrive point in environment that define the starting point of the Bezier curve
+- ***End*** Opendrive point in environment to end the Bezier curve
+- ***CpStart*** control point of the starting point of the Bezier curve
+- ***CpEnd*** control point of the ending point of the Bezier curve
+- ***isImmediate*** 
+
+Adds the following goals to the Virtual Driver
+- Add a Bezier curve to follow regarding two opendrive points
 
 ```cpp
 void AddGoalLongReachTime(float Speed, float TimeToReach = 0., bool isInfinite = true, bool isImmediate = true);
 ```
+Inputs:
+- ***Speed*** to reach
+- ***TimeToReach*** time to reach ***Speed***
+- ***isInfinite*** specify if the goal end when speed is reached, or will never end.
+- ***isImmediate*** 
+
+Adds the following goals to the Virtual Driver
+- Reach ***Speed***, maintain afterwards it if ***isInfinite***
 
 ```cpp
 void AddGoalLongReachDistance(float Speed, float DistToReach = 0., bool isInfinite = true, bool isImmediate = true);
 ```
+Inputs:
+- ***Speed*** to reach
+- ***DistToReach*** to reach ***Speed***
+- ***isImmediate***
+
+Adds the following goals to the Virtual Driver
+- Reach ***Speed*** in ***DistToReach*** meters
+
 
 ```cpp
 void AddGoalLongMaintain(float Speed, bool isImmediate = true);
 ```
+Inputs:
+- ***Speed*** to maintain
+- ***isImmediate*** 
+Adds the following goals to the Virtual Driver
+- Maintain ***Speed***
+
+### Data computation
 
 ```cpp
 float RoadDistanceTo(const UVirtualDriverComponent* Other);
 ```
+Inputs:
+- ***Other*** the targeted positionable in the current opendrive
+
+Returns:
+- Distance in track position (S), bumper to bumper
+
 
 ```cpp
 float THW(const UVirtualDriverComponent* Other);
 ```
+Inputs:
+- ***Other*** the targeted mobil in the current opendrive
+
+Returns:
+- Time headway between the two mobil
+
 
 ```cpp
 float TimeTo(const UOpenDriveComponent* Other);
 ```
+Inputs:
+- ***Other*** the targeted mobil in the current opendrive
+
+Returns:
+- Time to reach the ***Other*** mobil (at current speed)
+
 
 ```cpp
 float TTC(const UVirtualDriverComponent* Other);
 ```
+Inputs:
+- ***Other*** the targeted mobil in the current opendrive
+
+Returns:
+- Time to Collision to the ***Other*** mobil
+
 
 ```cpp
 float ETTC(const UVirtualDriverComponent* Other);
 ```
+Inputs:
+- ***Other*** the targeted mobil in the current opendrive
+
+Returns:
+- Enhanced Time to Collision (ISO 22839) to the ***Other*** mobil
+
 
 
 # List of exposed Properties of OpenDrive Component:
@@ -205,4 +287,8 @@ float SDistanceTo(const UOpenDriveComponent* Other);
 
 ```cpp
 float GetCurrentCurvature();
+```
+
+```cpp
+float GetNextCurvature(float dist) const;
 ```

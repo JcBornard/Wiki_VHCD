@@ -27,9 +27,11 @@ At a given simulation time, VD has:
 
 
 # VD use
-Once the VD is connected to a simulated car and an opendrive file is provided, then it become possible to place the simulated car holding the VD in the simulation.
+Once the VD is connected to a simulated car and an opendrive file is provided, 
+then it become possible to place the simulated car holding the VD in the simulation.
 
-If the car is placed on a lane, then this lane become natively the current lane to follow. This define automatically the current longitudinal goal
+If the car is placed on a lane, then this lane become natively the current lane to follow. 
+This define automatically the current longitudinal goal
 If not, then the car will try to reach the closest drivable lane.
 
 Default speed of the VD car, the default longitudinal goal, is set  overcome to 0m/s.
@@ -37,7 +39,8 @@ To trigger the movement of the car, it is needed to add a non nul longitudinal g
 
 # Goals
 VD's goals are what it will try to follow, a speed command (longitudinal) or a path (lateral).
-A goal can be infinite (e.g. a speed to follow, a lane to follow), or physically constrained (e.g. a path to lane change, a speed to reach in less than X meters).
+A goal can be infinite (e.g. a speed to follow, a lane to follow), or physically constrained 
+(e.g. a path to lane change, a speed to reach in less than X meters).
 The VD has two goal lists: (i) the longitudinal list and (ii) the lateral list.
 
 To add something to a list, most of the function of the VD have a "isImmediate" boolean parameter. 
