@@ -1,6 +1,6 @@
 # List of exposed Functions of Virtual Driver Component:
 
-![ClassDiagram](/Images/ClassDiagram.png)
+![ClassDiagram](../Images/ClassDiagram.png)
 
 ## Category "Virtual Driver Component"
 
