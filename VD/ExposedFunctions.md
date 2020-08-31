@@ -1,5 +1,7 @@
 # List of exposed Functions of Virtual Driver Component:
 
+[![ClassDiagram](/Images/ClassDiagram.png)](/Images/ClassDiagram.png)
+
 ## Category "Virtual Driver Component"
 
 ### Getters
@@ -300,6 +302,7 @@ float GetNextCurvature(float dist) const;
 function header
 ```
 Inputs
--***Name*** explanation
+- ***Name*** explanation
+
 Outputs explanations (either outputs, either what the function does)
--
+- 
