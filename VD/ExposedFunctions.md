@@ -1,7 +1,7 @@
-# List of exposed Functions of Virtual Driver Component:
-
+VD internal class diagram:
 [![ClassDiagram](../Images/ClassDiagram.png)](../Images/ClassDiagram.png)
 
+# List of exposed Functions of Virtual Driver Component:
 ## Category "Virtual Driver Component"
 
 ### Getters

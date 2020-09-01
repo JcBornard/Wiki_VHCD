@@ -15,7 +15,8 @@ At a given simulation time, VD has:
 - Current speed: the current speed of the controlled car
 
 - Current pedals depression: the current computed pedals depression allowing VD to reach the desired speed
-- Current steering wheel angle: the current computed angle of the steering wheel allowing VD to maintain the car close to the desired trajectory
+- Current steering wheel angle: the current computed angle of the steering wheel allowing VD to maintain the car close 
+to the desired trajectory
 
 - Current speed goal: the speed that VD need to reach and/or maintain
     - This is a **longitudinal goal**
